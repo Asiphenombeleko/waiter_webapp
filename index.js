@@ -6,8 +6,15 @@ import flash from 'express-flash'
 import session from 'express-session'
 import 'dotenv/config';
 import db from './db/database.js'
+import home_route from './routes/index_routes.js'
+import waiterDatabase from './quiries/databaselogic.js'
+import waiterData from './quiries/databaselogic.js'
 
 const app = express()
+const waiterModule = waiterDatabase(db)
+
+let homeRoute = home_route(waiterData,waiterModule);
+let WaiterData =waiterData(waiterModule)
 
 
 
@@ -35,7 +42,8 @@ app.use(
 );
 // session middleware
 app.use(flash());
-app.get("/")
+app.get("/",homeRoute.home)
+app.post("/waiters/:username",homeRoute.enterUsername)
 
 // Start the Express server
 const PORT = process.env.PORT || 3000;

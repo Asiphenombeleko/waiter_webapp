@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiter Scheduling App</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header>
+        <span> 👨‍🍳 </span><h1 class="chef-icon header">Welcome to the Waiter Scheduling App</h1>
+    </header>
+    <nav>
+        <!-- Navigation links (e.g., Home, Profile, Log Out) -->
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Log Out</a></li>
+        </ul>
+    </nav>
+    <form action="/waiters/:username" method="post">
+        <main class="menu-background">
+            <form action="/waiters/:username" method="post">
+                <!-- User Profile Section -->
+                <section  id="profile">
+                   <span> 👨‍🍳 </span> <h2>User Profile</h2>
+                    <!-- Display user information (e.g., username, name, email) -->
+                        <label for="registrationNumber">Waiter's Name:</label>
+                    <input type="text" id="registrationNumber" name="registrationNumber" class="large-text-field"
+                        size="20"/>
+                    
+                </section>
+            </form>
+            <!-- Workday Selection Section -->
+            <section id="workday-selection">
+                <h2>Select Your Workdays</h2><span> 👨‍🍳 </span>
+                <!-- Days of the week checkboxes -->
+                <label for="monday"><input type="checkbox" id="monday" name="workday" value="Monday"> Monday</label>
+                <label for="tuesday"><input type="checkbox" id="tuesday" name="workday" value="Tuesday"> Tuesday</label>
+                <label for="wednesday"><input type="checkbox" id="wednesday" name="workday" value="wednesday">
+                    wednesday</label>
+                <label for="thursday"><input type="checkbox" id="thursday" name="workday" value="thursday">
+                    thursday</label>
+                <label for="friday"><input type="checkbox" id="friday" name="workday" value="friday"> friday</label>
+                <!-- Include checkboxes for other days of the week -->
+
+                <!-- Button to update selected workdays -->
+                <button type="submit" id="update-workdays">Submit</button>
+            </section>
+
+            <!-- Selected Workdays Section -->
+            <section id="selected-workdays">
+                <span> 👨‍🍳 </span>
+                <h2>Your Selected Workdays</h2>
+                <!-- Display selected workdays here -->
+                <ul id="selected-days-list">
+                    <!-- Use JavaScript to dynamically populate this list -->
+                </ul>
+            </section>
+    </form>
+    </main>
+    <footer>
+        <!-- Footer content -->
+        <p>&copy; 2023 Waiter Scheduling App</p>
+    </footer>
+</body>
+
+</html>
