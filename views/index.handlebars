@@ -23,7 +23,7 @@
     </nav>
     <form action="/waiters/:username" method="post">
         <main class="menu-background">
-            <form action="/waiters/:username" method="post">
+           
                 <!-- User Profile Section -->
                 <section  id="profile">
                    <span> 👨‍🍳 </span> <h2>User Profile</h2>
@@ -33,7 +33,7 @@
                         size="20"/>
                     
                 </section>
-            </form>
+           
             <!-- Workday Selection Section -->
             <section id="workday-selection">
                 <h2>Select Your Workdays</h2><span> 👨‍🍳 </span>
@@ -48,7 +48,7 @@
                 <!-- Include checkboxes for other days of the week -->
 
                 <!-- Button to update selected workdays -->
-                <button type="submit" id="update-workdays">Submit</button>
+                <button type="submit"   onclick="return confirm('Are you sure you want to add these days?')" id="update-workdays">Submit</button>
             </section>
 
             <!-- Selected Workdays Section -->

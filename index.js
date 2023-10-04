@@ -43,6 +43,7 @@ app.use(
 // session middleware
 app.use(flash());
 app.get("/",homeRoute.home)
+app.get("//waiters/:username",homeRoute.enterUsername)
 app.post("/waiters/:username",homeRoute.enterUsername)
 
 // Start the Express server
