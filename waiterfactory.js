@@ -1,54 +1,66 @@
 export default function schedules(waiterModule) {
     let selectedDays = [];
-
-    async function getUsername(username) {
-        if (username) {
-           let result = await waiterModule.bookDay(day)
-           return result
-        }
-    }
-
+    let username = "";
+    let errorMesage;
 
     // Function to add a day to the selectedDays array
     function bookDay(day) {
         if (!selectedDays.includes(day)) {
             selectedDays.push(day);
-            console.log(`Booked: ${day}`);
+            errorMesage = `Booked: ${day}`
         } else {
-            console.log(`Already booked: ${day}`);
+            errorMesage = `Already booked: ${day}`
+            console.log(errorMesage);
         }
     }
 
     // Function to show the selected days
     function showSelectedDays() {
         if (selectedDays.length === 0) {
-            console.log("No days booked yet.");
+            errorMesage = "No days booked yet.";
         } else {
             console.log("Selected Days:");
             selectedDays.forEach((day, index) => {
-
+               errorMesage = `${index + 1}. ${day}`;
             });
         }
-
-
     }
-    function allErrors(username) {
-        let errorMessage = ""
-        if (!username || username.trim() === "") {
-            errorMessage = "Username is empty or undefined. Please provide a valid username."
-        } else {
 
-            errorMessage = "Hello, ${username}! Welcome."
+    // Function to set the username and handle errors
+    function setUsername(newUsername) {
+        if (!newUsername || newUsername.trim() === "") {
+            errorMesage = "Error: Username is empty or undefined. Please provide a valid username.";
+        } else {
+            username = newUsername;
+            errorMesage = `Hello, ${username}! Welcome.`;
         }
     }
+
+    // Function to get the current username
+    function getUsername() {
+        return username;
+    }
+
+    // Assuming you have a function named bookDay in your waiterModule
+    async function bookDayWithWaiterModule(day) {
+        if (!username || username.trim() === "") {
+           errorMesage = "Error: Please set a username before booking a day.";
+        } else {
+            try {
+                // Call waiterModule's bookDay function
+                let result = await waiterModule.bookDay(username, day);
+                errorMesage = result; // Log the result from the waiterModule
+            } catch (error) {
+                errorMesage = ("Error while booking a day:", error);
+            }
+        }
+    }
+
     return {
+        setUsername,
         getUsername,
         bookDay,
         showSelectedDays,
-        allErrors
-
-
-
-    }
-
+        bookDayWithWaiterModule,
+    };
 }

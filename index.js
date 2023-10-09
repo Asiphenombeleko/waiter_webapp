@@ -43,9 +43,9 @@ app.use(
 // session middleware
 app.use(flash());
 app.get("/",homeRoute.home)
-app.get("//waiters/:username",homeRoute.enterUsername)
-app.post("/waiters/:username",homeRoute.enterUsername)
-
+app.post("/waiters",homeRoute.enterUsername)
+app.get("/waiters/:username", homeRoute.selectDays)
+app.post("/waiters/:username", homeRoute.getSelectedDays)
 // Start the Express server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
