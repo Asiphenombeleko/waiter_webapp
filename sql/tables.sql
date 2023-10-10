@@ -1,10 +1,10 @@
 CREATE TABLE weekdays (
     id SERIAL PRIMARY KEY,
-    weekday_name VARCHAR(11) 
+    weekday_name VARCHAR(20) 
 );
 CREATE TABLE user_data (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(12) 
+    username VARCHAR(20) 
 );
 CREATE TABLE user_weekday (
     id SERIAL PRIMARY KEY,

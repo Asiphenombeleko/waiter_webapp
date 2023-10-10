@@ -1,7 +1,30 @@
-<div class="container">
+<div class="container1">
     <form action="/waiters/{{username}}" method="post">
 
         <h1>Waiter Day Booking</h1>
+        <div class="greeting">
+            <span class="wave">👋</span> Hello, {{username}}!
+        </div>
+        <script>
+            // Clear the error message after 3 seconds 
+            setTimeout(function () {
+                document.querySelector('.error-message').style.display = 'none';
+            },
+                3000);
+        </script>
+        {{#if errorMessage}}
+        <div class="error-message">{{ errorMessage }}</div>
+        {{/if}}
+        <script>
+            // Clear the error message after 3 seconds 
+            setTimeout(function () {
+                document.querySelector('.success-message').style.display = 'none';
+            },
+                3000);
+        </script>
+        {{#if successMessage}}
+        <div class="success-message">{{ successMessage }}</div>
+        {{/if}}
 
         <div class="weekday-checkboxes">
             <label for="sunday">

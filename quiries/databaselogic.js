@@ -16,14 +16,17 @@ export default function waiterData(db) {
         }
     }
 
-    async function bookShift(username_id, weekday_id) {
+    async function bookShift(username_id, weekday_ids) {
         try {
-            // Insert the shift information into the user_weekday table
-            await db.none('INSERT INTO user_weekday(username_id, weekday_id) VALUES ($1, $2)', [username_id, weekday_id]);
+          // Loop through the weekday_ids and insert each one
+          for (const weekdayId of weekday_ids) {
+            await db.none('INSERT INTO user_weekday(username_id, weekday_id) VALUES ($1, $2)', [username_id.id, weekdayId]);
+          }
         } catch (error) {
-            throw error;
+          throw error;
         }
-    }
+      }
+      
 
     async function getUserId(username) {
         try {
