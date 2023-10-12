@@ -51,14 +51,14 @@ export default function waiterData(db) {
     async function showDays() {
         try {
             // Retrieve a list of weekday names from the weekdays table
-            const result = await db.any('SELECT weekday_name FROM weekdays');
+            const result = await db.any('SELECT weekday_name,id FROM weekdays');
             return result;
         } catch (error) {
             throw error;
         }
     }
 
-    async function JoiningTables() {
+    async function joiningTables() {
         try {
             // Retrieve a list of usernames along with the weekdays they are associated with
             const daysQuery = `
@@ -80,6 +80,6 @@ export default function waiterData(db) {
         getUserId,
         getWeekId,
         showDays,
-        JoiningTables,
+        joiningTables,
     };
 }

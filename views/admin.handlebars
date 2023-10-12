@@ -1,50 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Waiter Scheduling App</title>
-    <link rel="stylesheet" href="admin-style.css">
-</head>
 <body>
 
     <header>
         <h1>Admin Panel - Waiter Scheduling App</h1>
     </header>
-    <nav>
-        <!-- Navigation links (e.g., Home, Profile, Log Out) -->
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Log Out</a></li>
-        </ul>
-    </nav>
+
     <div class="container2">
-<form action="/days" method="get"></form>
-    <main>
-        <section id="booking-list">
-            <h2>Booked Days</h2>
-            <!-- Display a list of waiters who booked days -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>Waiter Name</th>
-                        {{daysAndName}}
-                        <th>Booked Days</th>
-                    </tr>
-                </thead>
-                <tbody id="waiter-list">
-                    <!-- Waiter data will be populated here dynamically using JavaScript -->
-                </tbody>
-            </table>
-        </section>
-    </main>
-    </div>
-    <footer>
-        <!-- Footer content -->
-        <p>&copy; 2023 Waiter Scheduling App</p>
-    </footer>
-    
-   
+        <form action="/days" method="post"></form>
+
+        <table>
+            <tr>
+                <th>Weekdays</th>
+                <th>Waiters</th>
+
+            </tr>
+            <tr>
+                <td> {{#each weekday}}
+
+                    <div class="week"> {{this.weekday_name}}</div>
+
+                    {{/each}}
+                </td>
+            <tr>
+                <td> {{#each result}}
+                    <div class="waiter-name">
+                        {{this.username}}
+                    </div>
+                    {{/each}}
+                </td>
+            </tr>
+            </tr>
+        </table>
+
 </body>
+
 </html>

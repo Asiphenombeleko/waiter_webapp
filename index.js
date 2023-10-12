@@ -46,7 +46,7 @@ app.get("/",homeRoute.home)
 app.post("/waiters",homeRoute.enterUsername)
 app.get("/waiters/:username", homeRoute.selectDays)
 app.post("/waiters/:username", homeRoute.getSelectedDays)
-// app.get("/days",homeRoute.showNameAndDays)
+app.get("/days",homeRoute.showNameAndDays)
 // Start the Express server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
