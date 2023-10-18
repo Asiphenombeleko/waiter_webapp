@@ -3,16 +3,18 @@
     <header>
         <h1>Admin Panel - Waiter Scheduling App</h1>
     </header>
- <script>
-                // Clear the error message after 3 seconds 
-                setTimeout(function () {
-                    document.querySelector('.reset-message').style.display = 'none';
-                },
-                    3000);
-            </script>
-            {{#if reset}}
-            <div class="reset-message">{{ reset }}</div>
-            {{/if}}
+
+
+    <script>
+        // Clear the error message after 3 seconds 
+        setTimeout(function () {
+            document.querySelector('.reset-message').style.display = 'none';
+        },
+            3000);
+    </script>
+    {{#if reset}}
+    <div class="reset-message">{{ reset }}</div>
+    {{/if}}
     <div class="container2">
         <form action="/days" method="post"></form>
 
@@ -58,10 +60,10 @@
 
 
         </table>
-        
+
         <form action="/reset" method="post">
 
-            <button class="btn">Reset</button>
+            <button class="btn" type="submit" onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
         </form>
 
 </body>
