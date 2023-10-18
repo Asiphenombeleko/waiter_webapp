@@ -25,6 +25,7 @@ app.engine(
     layoutsDir: "./views/layouts",
   })
 );
+
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 app.use(express.static("public"));
@@ -46,7 +47,8 @@ app.get("/",homeRoute.home)
 app.post("/waiters",homeRoute.enterUsername)
 app.get("/waiters/:username", homeRoute.selectDays)
 app.post("/waiters/:username", homeRoute.getSelectedDays)
-app.get("/days",homeRoute.showNameAndDays)
+app.get("/days",homeRoute.getNamesSelectedWeekday)
+app.post("/reset", homeRoute.reset)
 // Start the Express server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

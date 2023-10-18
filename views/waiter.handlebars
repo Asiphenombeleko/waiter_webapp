@@ -1,63 +1,144 @@
-<div class="container1">
-    <form action="/waiters/{{username}}" method="post">
+<!DOCTYPE html>
+<html lang="en">
 
-        <h1>Waiter Day Booking</h1>
-        <div class="greeting">
-            <span class="wave">👋</span> Hello, {{username}}!
-        </div>
-        <script>
-            // Clear the error message after 3 seconds 
-            setTimeout(function () {
-                document.querySelector('.error-message').style.display = 'none';
-            },
-                3000);
-        </script>
-        {{#if errorMessage}}
-        <div class="error-message">{{ errorMessage }}</div>
-        {{/if}}
-        <script>
-            // Clear the error message after 3 seconds 
-            setTimeout(function () {
-                document.querySelector('.success-message').style.display = 'none';
-            },
-                3000);
-        </script>
-        {{#if successMessage}}
-        <div class="success-message">{{ successMessage }}</div>
-        {{/if}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiter Day Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-        <div class="weekday-checkboxes">
-            <label for="sunday">
-                Sunday
-                <input type="checkbox" id="sunday" name="weekday" value="7">
-            </label>
-            <label for="monday">
-                Monday
-                <input type="checkbox" id="monday" name="weekday" value="1">
-            </label>
-            <label for="tuesday">
-                Tuesday
-                <input type="checkbox" id="tuesday" name="weekday" value="2">
-            </label>
-            <label for="wednesday">
-                Wednesday
-                <input type="checkbox" id="wednesday" name="weekday" value="3">
-            </label>
-            <label for="thursday">
-                Thursday
-                <input type="checkbox" id="thursday" name="weekday" value="4">
-            </label>
-            <label for="friday">
-                Friday
-                <input type="checkbox" id="friday" name="weekday" value="5">
-            </label>
-            <label for="saturday">
-                Saturday
-                <input type="checkbox" id="saturday" name="weekday" value="6">
-            </label>
-        </div>
+        .container1 {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
 
-        <button type="submit" class="btn">Submit</button>
+        h1 {
+            font-family: 'Helvetica', sans-serif;
+            color: #333;
+        }
 
-    </form>
-</div>
+        .greeting {
+            font-size: 18px;
+        }
+
+        .wave {
+            font-size: 24px;
+        }
+
+        .error-message,
+        .success-message {
+            font-size: 16px;
+            color: #090808;
+        }
+
+        .weekday-checkboxes {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="checkbox"] {
+            margin-left: 10px;
+        }
+
+        .btn {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn:hover {
+            background-color: #ff4500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container1">
+        <form action="/waiters/{{username}}" method="post">
+            <h1>Waiter Day Booking</h1>
+            <div class="greeting">
+               <h3> <span class="wave">👋</span> Hello, {{username}}!
+            </div>
+
+            <script>
+                // Clear the error message after 3 seconds 
+                setTimeout(function () {
+                    document.querySelector('.error-message').style.display = 'none';
+                },
+                    3000);
+            </script>
+            {{#if errorMessage}}
+            <div class="error-message">{{ errorMessage }}</div>
+            {{/if}}
+            <script>
+                // Clear the error message after 3 seconds 
+                setTimeout(function () {
+                    document.querySelector('.success-message').style.display = 'none';
+                },
+                    3000);
+            </script>
+            {{#if successMessage}}
+            <div class="success-message">{{ successMessage }}</div>
+            {{/if}}
+
+            <div class="weekday-checkboxes">
+                <label for="sunday">
+                    Sunday
+                    <input type="checkbox" id="sunday" name="weekday" value="7">
+                </label>
+                <label for="monday">
+                    Monday
+                    <input type="checkbox" id="monday" name="weekday" value="1">
+                </label>
+                <label for="tuesday">
+                    Tuesday
+                    <input type="checkbox" id="tuesday" name="weekday" value="2">
+                </label>
+                <label for="wednesday">
+                    Wednesday
+                    <input type="checkbox" id="wednesday" name="weekday" value="3">
+                </label>
+                <label for="thursday">
+                    Thursday
+                    <input type="checkbox" id="thursday" name="weekday" value="4">
+                </label>
+                <label for="friday">
+                    Friday
+                    <input type="checkbox" id="friday" name="weekday" value="5">
+                </label>
+                <label for="saturday">
+                    Saturday
+                    <input type="checkbox" id="saturday" name="weekday" value="6">
+                </label>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

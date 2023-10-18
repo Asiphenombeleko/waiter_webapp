@@ -73,6 +73,9 @@ export default function waiterData(db) {
             throw error;
         }
     }
+    async function reset(){
+        await db.none('DELETE FROM user_weekday')
+    }
 
     return {
         insertUsername,
@@ -81,5 +84,6 @@ export default function waiterData(db) {
         getWeekId,
         showDays,
         joiningTables,
+        reset
     };
 }

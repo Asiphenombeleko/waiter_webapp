@@ -1,3 +1,5 @@
+
+
 export default function routes(waiterModule, waiterData) {
 
    async function home(req, res) {
@@ -20,12 +22,12 @@ export default function routes(waiterModule, waiterData) {
    async function selectDays(req, res) {
       let errorMessage = req.flash("error")[0]
       let successMessage = req.flash("success")[0]
-     
+
       res.render('waiter', {
          username: req.params.username,
          errorMessage,
          successMessage,
-         
+
       })
    }
    async function getSelectedDays(req, res) {
@@ -40,7 +42,7 @@ export default function routes(waiterModule, waiterData) {
       const userId = await waiterData.getUserId(username);
       if (userId) {
          await waiterData.bookShift({ id: userId }, selectedDays);
-        
+
          req.flash("success", "You have successfully booked your days.");
 
       }
@@ -48,22 +50,60 @@ export default function routes(waiterModule, waiterData) {
 
 
    }
-   async function showNameAndDays(req, res) {
-      // Retrieve data using the joiningTables function from my waiterData module
-      let result =  await waiterData.joiningTables();
-      let weekday = await waiterData.showDays()
-      // console.log(result);
+   async function getNamesSelectedWeekday(req, res) {
+      
+      let result = await waiterData.joiningTables();
+      const selectedWeekdays = {
+         Monday: [],
+         Tuesday: [],
+         Wednesday: [],
+         Thursday: [],
+         Friday: [],
+         Saturday: [],
+         Sunday: []
+      };
+
+      result.forEach((dataInserted) => {
+         const { username, weekday_name } = dataInserted;
+         const day = weekday_name
+         //   charAt(0).toUpperCase() + weekday.slice(1).toLowerCase(); // Capitalize the first letter of the weekday
+         if (selectedWeekdays[day]) {
+            selectedWeekdays[day].push(username);
+         }
+
+      })
+      let reset = req.flash("reset")[0]
       res.render('admin', {
-        result,
-        weekday
+         selectedWeekdays,
+         reset
       });
-    
-    }
+      console.log(selectedWeekdays);
+
+      return selectedWeekdays;
+
+   }
+   async function addColor(daysBooked) {
+      if (daysBooked.length == 3) {
+         return "Success"
+      } else if (daysBooked.length < 3 && daysBooked.length > 0) {
+         return "warning"
+      } else if (daysBooked.length > 3) {
+         return "danger"
+      }
+   }
+   async function reset(req, res){
+      await waiterData.reset()
+      req.flash("reset", "Successfully reset the Roster")
+       res.redirect("/days")
+   }
+
    return {
       home,
       enterUsername,
       selectDays,
       getSelectedDays,
-      showNameAndDays
+      getNamesSelectedWeekday,
+      addColor,
+      reset
    }
 }

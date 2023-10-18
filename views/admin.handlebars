@@ -3,33 +3,66 @@
     <header>
         <h1>Admin Panel - Waiter Scheduling App</h1>
     </header>
-
+ <script>
+                // Clear the error message after 3 seconds 
+                setTimeout(function () {
+                    document.querySelector('.reset-message').style.display = 'none';
+                },
+                    3000);
+            </script>
+            {{#if reset}}
+            <div class="reset-message">{{ reset }}</div>
+            {{/if}}
     <div class="container2">
         <form action="/days" method="post"></form>
 
         <table>
             <tr>
+
                 <th>Weekdays</th>
                 <th>Waiters</th>
 
             </tr>
-            <tr>
-                <td> {{#each weekday}}
 
-                    <div class="week"> {{this.weekday_name}}</div>
-
-                    {{/each}}
-                </td>
             <tr>
-                <td> {{#each result}}
-                    <div class="waiter-name">
-                        {{this.username}}
-                    </div>
-                    {{/each}}
-                </td>
+                <td>Monday </td>
+                <td>{{selectedWeekdays.Monday}}</td>
+            </tr>
+
+            <tr>
+                <td>Tuesday </td>
+                <td>{{selectedWeekdays.Tuesday}}</td>
+            </tr>
+            <tr>
+                <td>Wednesday </td>
+                <td>{{selectedWeekdays.Wednesday}}</td>
+            </tr>
+            <tr>
+                <td>Thursday </td>
+                <td>{{selectedWeekdays.Thursday}}</td>
+            </tr>
+            <tr>
+                <td>Friday </td>
+                <td>{{selectedWeekdays.Friday}}</td>
+            </tr>
+            <tr>
+                <td>Saturday </td>
+                <td>{{selectedWeekdays.Saturday}}</td>
             </tr>
             </tr>
+            <tr>
+                <td>Sunday </td>
+                <td>{{selectedWeekdays.Sunday}}</td>
+            </tr>
+
+
+
         </table>
+        
+        <form action="/reset" method="post">
+
+            <button class="btn">Reset</button>
+        </form>
 
 </body>
 
