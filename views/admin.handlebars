@@ -1,3 +1,4 @@
+
 <body>
 
     <header>
@@ -28,42 +29,45 @@
 
             <tr>
                 <td>Monday </td>
-                <td>{{selectedWeekdays.Monday}}</td>
+                <td class="{{selectedWeekdays.Monday.colour}}">{{selectedWeekdays.Monday.waiters}}</td>
             </tr>
 
             <tr>
                 <td>Tuesday </td>
-                <td>{{selectedWeekdays.Tuesday}}</td>
+                <td class="{{selectedWeekdays.Tuesday.colour}}">{{selectedWeekdays.Tuesday.waiters}}</td>
             </tr>
             <tr>
                 <td>Wednesday </td>
-                <td>{{selectedWeekdays.Wednesday}}</td>
+                <td class="{{selectedWeekdays.Wednesday.colour}}">{{selectedWeekdays.Wednesday.waiters}}</td>
             </tr>
             <tr>
                 <td>Thursday </td>
-                <td>{{selectedWeekdays.Thursday}}</td>
+                <td class="{{selectedWeekdays.Thursday.colour}}">{{selectedWeekdays.Thursday.waiters}}</td>
             </tr>
             <tr>
                 <td>Friday </td>
-                <td>{{selectedWeekdays.Friday}}</td>
+                <td class="{{selectedWeekdays.Friday.colour}}">{{selectedWeekdays.Friday.waiters}}</td>
             </tr>
             <tr>
                 <td>Saturday </td>
-                <td>{{selectedWeekdays.Saturday}}</td>
+                <td class="{{selectedWeekdays.Saturday.colour}}">{{selectedWeekdays.Saturday.waiters}}</td>
             </tr>
             </tr>
             <tr>
                 <td>Sunday </td>
-                <td>{{selectedWeekdays.Sunday}}</td>
+                <td class="{{selectedWeekdays.Sunday.colour}}">{{selectedWeekdays.Sunday.waiters}}</td>
             </tr>
 
 
 
         </table>
 
+        <span>{{#each waiterNames}}{{username}}{{/each}}</span>
+
         <form action="/reset" method="post">
 
-            <button class="btn" type="submit" onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
+            <button class="btn" type="submit"
+                onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
         </form>
 
 </body>

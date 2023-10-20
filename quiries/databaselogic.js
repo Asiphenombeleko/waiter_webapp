@@ -1,4 +1,10 @@
 export default function waiterData(db) {
+
+
+    async function getNames(){
+        let results = await db.any('SELECT DISTINCT username from user_data')
+        return results
+    }
     async function insertUsername(username) {
         try {
             // Check if the username is empty or undefined
@@ -18,15 +24,15 @@ export default function waiterData(db) {
 
     async function bookShift(username_id, weekday_ids) {
         try {
-          // Loop through the weekday_ids and insert each one
-          for (const weekdayId of weekday_ids) {
-            await db.none('INSERT INTO user_weekday(username_id, weekday_id) VALUES ($1, $2)', [username_id.id, weekdayId]);
-          }
+            // Loop through the weekday_ids and insert each one
+            for (const weekdayId of weekday_ids) {
+                await db.none('INSERT INTO user_weekday(username_id, weekday_id) VALUES ($1, $2)', [username_id.id, weekdayId]);
+            }
         } catch (error) {
-          throw error;
+            throw error;
         }
-      }
-      
+    }
+
 
     async function getUserId(username) {
         try {
@@ -47,7 +53,19 @@ export default function waiterData(db) {
             throw error;
         }
     }
+    async function getWaiterSelectedDays(username_id) {
+        try {
+            const selectedDays = await db.any('SELECT weekday_id FROM user_weekday WHERE username_id = $1', [username_id]);
 
+            if (selectedDays.length === 1) {
+                return selectedDays[0].selected_days;
+            } else {
+                return []; // Return an empty array if no data is found
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
     async function showDays() {
         try {
             // Retrieve a list of weekday names from the weekdays table
@@ -73,7 +91,7 @@ export default function waiterData(db) {
             throw error;
         }
     }
-    async function reset(){
+    async function reset() {
         await db.none('DELETE FROM user_weekday')
     }
 
@@ -84,6 +102,8 @@ export default function waiterData(db) {
         getWeekId,
         showDays,
         joiningTables,
-        reset
+        reset,
+        getWaiterSelectedDays,
+        getNames
     };
 }

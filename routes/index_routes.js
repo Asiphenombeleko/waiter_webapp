@@ -54,13 +54,13 @@ export default function routes(waiterModule, waiterData) {
       
       let result = await waiterData.joiningTables();
       const selectedWeekdays = {
-         Monday: [],
-         Tuesday: [],
-         Wednesday: [],
-         Thursday: [],
-         Friday: [],
-         Saturday: [],
-         Sunday: []
+         Monday: {waiters:[], colour:""},
+         Tuesday:  {waiters:[], colour:""},
+         Wednesday:  {waiters:[], colour:""},
+         Thursday:  {waiters:[], colour:""},
+         Friday:  {waiters:[], colour:""},
+         Saturday:  {waiters:[], colour:""},
+         Sunday:  {waiters:[], colour:""}
       };
 
       result.forEach((dataInserted) => {
@@ -68,28 +68,36 @@ export default function routes(waiterModule, waiterData) {
          const day = weekday_name
          //   charAt(0).toUpperCase() + weekday.slice(1).toLowerCase(); // Capitalize the first letter of the weekday
          if (selectedWeekdays[day]) {
-            selectedWeekdays[day].push(username);
+            selectedWeekdays[day].waiters.push(username),
+            selectedWeekdays[day].colour =  addColor(selectedWeekdays[day].waiters.length)
          }
 
       })
+      let waiterNames = await getWaiterName()
+      console.log(waiterNames);
       let reset = req.flash("reset")[0]
       res.render('admin', {
          selectedWeekdays,
-         reset
+         reset,
+         waiterNames
       });
-      console.log(selectedWeekdays);
+      console.log(selectedWeekdays["Monday"].waiters);
 
       return selectedWeekdays;
 
    }
-   async function addColor(daysBooked) {
-      if (daysBooked.length == 3) {
-         return "Success"
-      } else if (daysBooked.length < 3 && daysBooked.length > 0) {
+    function addColor(daysBooked) {
+      if (daysBooked == 3) {
+         return "success"
+      } else if (daysBooked < 3 && daysBooked > 0) {
          return "warning"
-      } else if (daysBooked.length > 3) {
+      } else if (daysBooked > 3) {
          return "danger"
       }
+   }
+   async function getWaiterName(){
+      let getNames = await waiterData.getNames()
+      return getNames
    }
    async function reset(req, res){
       await waiterData.reset()
@@ -104,6 +112,7 @@ export default function routes(waiterModule, waiterData) {
       getSelectedDays,
       getNamesSelectedWeekday,
       addColor,
-      reset
+      reset,
+      getWaiterName
    }
 }

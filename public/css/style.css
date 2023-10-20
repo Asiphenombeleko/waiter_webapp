@@ -148,6 +148,13 @@ th {
   background-color: #333;
   color: white;
 }
-.green{
-  color: green;
+.success{
+  background-color:rgb(31, 224, 31);
+  
+}
+.warning{
+  background-color: orange;
+}
+.danger{
+  background-color: red;
 }
