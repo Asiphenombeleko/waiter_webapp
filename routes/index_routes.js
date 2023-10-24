@@ -20,28 +20,21 @@ export default function routes(waiterModule, waiterData) {
    }
 
    async function selectDays(req, res) {
+      let errorMessage = req.flash("error")[0];
+      let successMessage = req.flash("success")[0];
+  
+      // Fetch the selected days for the user (replace 'username' with the actual username)
       const username = req.params.username;
-      const userSelectedDays = await waiterData.getWaiterSelectedDays(username);
-      let userSelections = {
-         sunday: false,
-         monday: false,
-         tuesday: false,
-         // Add other days here...
-     };
-     userSelectedDays.forEach((selectedDay) => {
-      userSelections[selectedDay] = true;
-    });
-      let errorMessage = req.flash("error")[0]
-      let successMessage = req.flash("success")[0]
-
+      const selectedDays = await waiterData.getWaiterSelectedDays(username);
+  console.log(selectedDays);
       res.render('waiter', {
-         username: req.params.username,
-         errorMessage,
-         successMessage,
-         userSelections:userSelections
-
-      })
-   }
+          username,
+          errorMessage,
+          successMessage,
+          selectedDays, // Pass the selected days to the template
+      });
+  }
+  
    async function getSelectedDays(req, res) {
       const selectedDays = req.body.weekday;
       const username = req.params.username;
@@ -116,6 +109,7 @@ export default function routes(waiterModule, waiterData) {
       req.flash("reset", "Successfully reset the Roster")
        res.redirect("/days")
    }
+   
 
    return {
       home,
