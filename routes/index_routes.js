@@ -20,6 +20,17 @@ export default function routes(waiterModule, waiterData) {
    }
 
    async function selectDays(req, res) {
+      const username = req.params.username;
+      const userSelectedDays = await waiterData.getWaiterSelectedDays(username);
+      let userSelections = {
+         sunday: false,
+         monday: false,
+         tuesday: false,
+         // Add other days here...
+     };
+     userSelectedDays.forEach((selectedDay) => {
+      userSelections[selectedDay] = true;
+    });
       let errorMessage = req.flash("error")[0]
       let successMessage = req.flash("success")[0]
 
@@ -27,6 +38,7 @@ export default function routes(waiterModule, waiterData) {
          username: req.params.username,
          errorMessage,
          successMessage,
+         userSelections:userSelections
 
       })
    }

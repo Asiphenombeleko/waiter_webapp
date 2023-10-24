@@ -53,10 +53,10 @@ export default function waiterData(db) {
             throw error;
         }
     }
-    async function getWaiterSelectedDays(username_id) {
+    async function getWaiterSelectedDays(username) {
         try {
-            const selectedDays = await db.any('SELECT weekday_id FROM user_weekday WHERE username_id = $1', [username_id]);
-
+            const selectedDays = await db.any('SELECT weekday_id FROM user_weekday WHERE username_id = (SELECT id FROM user_data WHERE username = $1)', [username]);
+    
             if (selectedDays.length === 1) {
                 return selectedDays[0].selected_days;
             } else {
@@ -66,6 +66,7 @@ export default function waiterData(db) {
             throw error;
         }
     }
+    
     async function showDays() {
         try {
             // Retrieve a list of weekday names from the weekdays table

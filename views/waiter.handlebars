@@ -109,11 +109,11 @@
             <div class="weekday-checkboxes">
                 <label for="sunday">
                     Sunday
-                    <input type="checkbox" id="sunday" name="weekday" value="7">
+                    <input type="checkbox" id="sunday" name="weekday" value="7" {{#if userSelections.sunday}}checked{{/if}}>
                 </label>
                 <label for="monday">
                     Monday
-                    <input type="checkbox" id="monday" name="weekday" value="1">
+                    <input type="checkbox" id="monday" name="weekday" value="1" {{#if userSelections.monday}}checked{{/if}} >
                 </label>
                 <label for="tuesday">
                     Tuesday
