@@ -11,7 +11,7 @@ export default function waiterData(db) {
             if (!username || username.trim() === "") {
                 throw new Error("Username is empty or undefined. Please provide a valid username.");
             }
-
+                
             // Check if the username already exists in the database
             const waiterExists = await db.oneOrNone('SELECT username FROM user_data WHERE username = $1', [username]);
             if (!waiterExists) {

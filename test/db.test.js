@@ -8,55 +8,40 @@ const db = pgPromise()(connectionString);
 
 let data =waiterData(db)
 
-describe('waiterData Module', () => {
-    beforeAll(async () => {
-      // You may want to set up a clean test database or clear relevant tables before testing
-      // Example: Create test database or truncate tables
+  describe('Waiter Data Functions', () => {
+    before(async () => {
+      // Set up your database or perform any necessary actions before running tests
     });
   
-    afterAll(async () => {
-      // You may want to clean up after testing, e.g., close database connections
-      await data.end();
+    after(async () => {
+      // Clean up the database or perform any necessary actions after running tests
+      await db.end();
     });
   
-    describe('insertUsername', () => {
-      it('should insert a valid username into the database', async () => {
-        const username = 'testuser';
-        await data.insertUsername(username);
+    it('should insert and retrieve usernames', async () => {
+      await waiterData.reset();
   
-        // Write assertions to check if the user was successfully inserted
-        // You can query the database to check if the user exists in the user_data table
-      });
+      const username = 'testuser';
   
-      it('should throw an error for an empty username', async () => {
-        const emptyUsername = '';
-        await expect(data.insertUsername(emptyUsername)).rejects.toThrow();
-      });
+      await waiterData.insertUsername(username);
+      const usernames = await waiterData.getNames();
   
-      // Add more test cases as needed
+      assert.deepStrictEqual(usernames, [{ username }]);
     });
   
-    describe('bookShift', () => {
-      // Write test cases for the bookShift function
+    it('should associate waiters with weekdays', async () => {
+      await waiterData.reset();
+  
+      const username = 'testuser';
+      const weekdayIds = [1, 2, 3]; // Replace with valid weekday IDs
+  
+      const userId = await waiterData.getUserId(username);
+      await waiterData.bookShift({ id: userId }, weekdayIds);
+  
+      const selectedDays = await waiterData.getWaiterSelectedDays({ id: userId });
+  
+      assert.deepStrictEqual(selectedDays, weekdayIds);
     });
   
-    describe('getUserId', () => {
-      // Write test cases for the getUserId function
-    });
-  
-    describe('getWeekId', () => {
-      // Write test cases for the getWeekId function
-    });
-  
-    describe('showDays', () => {
-      // Write test cases for the showDays function
-    });
-  
-    describe('joiningTables', () => {
-      // Write test cases for the joiningTables function
-    });
-  
-    describe('reset', () => {
-      // Write test cases for the reset function
-    });
-  })
+    // Add more test cases for other functions
+  });
