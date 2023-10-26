@@ -8,15 +8,15 @@ body {
   text-align: center;
 }
 .waiters-list {
-  width: 200px; /* Adjust the width as needed */
+  width: 200px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); 
   padding: 30px;
 }
 .waiters-container li {
   margin-right: 20px;
-  font-size: 40px; /* Adjust the font size as needed */
+  font-size: 40px; 
 }
 .waiterKey{
   justify-content: center;
@@ -53,24 +53,30 @@ gap: 5em;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  color: rgb(23, 19, 19); /* Text color */
-  font-weight: bold; /* Bold text */
+  color: rgb(23, 19, 19); 
+  font-weight: bold; 
   margin-right: 20px;
 }
 .key-container p {
   font-size: 16px;
 }
 .enough{
+  padding: 1em;
+  color: white;
   background-color: #008000;
 }
 .few{
+  padding: 1em;
+  color: white;
   background-color: orange;
 }
 .many{
+  padding: 1em;
+  color: white;
   background-color: red;
 }
 input[type="checkbox"] {
-  transform: scale(1.5); /* Increase the size of checkboxes */
+  transform: scale(1.5); 
   margin-left: 10px;
 }
 label {
@@ -116,17 +122,17 @@ span{
   padding: 10px;
   border: 2px solid darkgreen;
   margin-top: 10px;
-  /* display: none; Hide by default */
+
 }
 
-/* Style for error message */
+
 .error-message {
   background-color: rgb(247, 93, 93);
   color: rgb(5, 5, 5);
   padding: 10px;
   border: 2px solid darkred;
   margin-top: 10px;
-  /* display: none; Hide by default */
+
 }
 .weekday-checkboxes {
   margin: 20px 0;
@@ -168,18 +174,18 @@ input[type="checkbox"] {
   padding: 20px;
 }
 
-/* Style the waving hand emoji */
+
 .wave {
-  font-size: 48px; /* Adjust the size as needed */
+  font-size: 48px; 
 }
 
 
 
-/* Table style */
+
 table {
   padding-bottom: 1em;
-  max-width: 80%; /* Set a maximum width for the table */
-  margin: 0 auto; /* Center the table within its container */
+  max-width: 80%;
+  margin: 0 auto; 
   border-collapse: collapse;
   margin-top: 20px;
   margin-bottom: 20px;

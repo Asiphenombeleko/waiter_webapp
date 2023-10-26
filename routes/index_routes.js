@@ -23,7 +23,7 @@ export default function routes(waiterModule, waiterData) {
       let errorMessage = req.flash("error")[0];
       let successMessage = req.flash("success")[0];
   
-      // Fetch the selected days for the user (replace 'username' with the actual username)
+   
       const username = req.params.username;
       const selectedDays = await waiterData.getWaiterSelectedDays(username);
   console.log(selectedDays);
@@ -31,7 +31,7 @@ export default function routes(waiterModule, waiterData) {
           username,
           errorMessage,
           successMessage,
-          selectedDays, // Pass the selected days to the template
+          selectedDays, 
       });
   }
   

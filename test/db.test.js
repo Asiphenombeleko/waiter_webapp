@@ -10,11 +10,11 @@ let data =waiterData(db)
 
   describe('Waiter Data Functions', () => {
     before(async () => {
-      // Set up your database or perform any necessary actions before running tests
+    
     });
   
     after(async () => {
-      // Clean up the database or perform any necessary actions after running tests
+      
       await db.end();
     });
   
@@ -43,5 +43,5 @@ let data =waiterData(db)
       assert.deepStrictEqual(selectedDays, weekdayIds);
     });
   
-    // Add more test cases for other functions
+    
   });
