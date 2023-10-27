@@ -106,36 +106,15 @@
             <div class="success-message">{{ successMessage }}</div>
             {{/if}}
 
+    {{#each selectedDays}}
             <div class="weekday-checkboxes">
-                <label for="sunday">
-                    Sunday
-                    <input type="checkbox" id="sunday" name="weekday" value="7" {{#if selectedWeekdays.Sunday}}checked{{/if}}>
+                <label for="{{weekday_name}}">
+                    {{weekday_name}}
+                    <input type="checkbox" id="{{this.weekday_name}}" name="weekday" value="{{id}}" {{#if checked}} checked {{/if}}>
                 </label>
-                <label for="monday">
-                    Monday
-                    <input type="checkbox" id="monday" name="weekday" value="1">
-                </label>
-                <label for="tuesday">
-                    Tuesday
-                    <input type="checkbox" id="tuesday" name="weekday" value="2">
-                </label>
-                <label for="wednesday">
-                    Wednesday
-                    <input type="checkbox" id="wednesday" name="weekday" value="3">
-                </label>
-                <label for="thursday">
-                    Thursday
-                    <input type="checkbox" id="thursday" name="weekday" value="4">
-                </label>
-                <label for="friday">
-                    Friday
-                    <input type="checkbox" id="friday" name="weekday" value="5">
-                </label>
-                <label for="saturday">
-                    Saturday
-                    <input type="checkbox" id="saturday" name="weekday" value="6">
-                </label>
-            </div>
+
+    {{/each}}
+                </div>
             <button type="submit" class="btn">Submit</button>
         </form>
     </div>
