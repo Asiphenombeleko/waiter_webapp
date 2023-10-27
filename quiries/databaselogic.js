@@ -20,14 +20,18 @@ export default function waiterData(db) {
       }
       // Check if the username already exists in the database
       const waiterExists = await db.oneOrNone(
-        "SELECT username FROM user_data WHERE username = $1",
+        "SELECT username FROM user_data WHERE username ilike $1",
         [username]
       );
+
+      console.log(waiterExists);
       if (!waiterExists) {
-        await db.none("INSERT INTO user_data(username) VALUES ($1)", [
+        await db.none("INSERT INTO user_data(username)  VALUES ($1)", [
           username,
         ]);
       }
+
+      return waiterExists.username
     } catch (error) {
       throw error;
     }
@@ -55,7 +59,7 @@ export default function waiterData(db) {
     try {
       // Retrieve the user's ID from the user_data table
       const result = await db.one(
-        "SELECT id FROM user_data WHERE username = $1",
+        "SELECT id FROM user_data WHERE username ilike $1",
         [username]
       );
       return result.id;

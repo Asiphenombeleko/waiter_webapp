@@ -3,10 +3,10 @@ export default function routes(waiterModule, waiterData) {
     res.render("index", {});
   }
   async function enterUsername(req, res) {
-    const username = req.body.username;
+    let username = req.body.username;
     console.log(username);
     if (username) {
-      await waiterData.insertUsername(username);
+      username = await waiterData.insertUsername(username);
     }
     res.redirect("/waiters/" + username);
   }
