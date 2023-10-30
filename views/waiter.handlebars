@@ -46,6 +46,35 @@
             color: #090808;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn.logout {
+            background-color: #007bff;
+            /* Change the color for the logout button */
+        }
+
+        .btn:hover {
+            background-color: #ff4500;
+        }
+
+        .btn.logout:hover {
+            background-color: #0056b3;
+            /* Change the color on hover for the logout button */
+        }
+
         .weekday-checkboxes {
             margin: 20px 0;
         }
@@ -82,7 +111,7 @@
         <form action="/waiters/{{username}}" method="post">
             <h1>Waiter Day Booking</h1>
             <div class="greeting">
-               <h3> <span class="wave">👋</span> Hello, {{username}}!
+                <h3> <span class="wave">👋</span> Hello, {{username}}!
             </div>
 
             <script>
@@ -106,18 +135,27 @@
             <div class="success-message">{{ successMessage }}</div>
             {{/if}}
 
-    {{#each selectedDays}}
+            {{#each selectedDays}}
             <div class="weekday-checkboxes">
                 <label for="{{weekday_name}}">
                     {{weekday_name}}
-                    <input type="checkbox" id="{{this.weekday_name}}" name="weekday" value="{{id}}" {{#if checked}} checked {{/if}}>
+                    <input type="checkbox" id="{{this.weekday_name}}" name="weekday" value="{{id}}" {{#if checked}}
+                        checked {{/if}}>
                 </label>
 
-    {{/each}}
-                </div>
-            <button type="submit" class="btn">Submit</button>
+                {{/each}}
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn">Submit</button>
+        </form>
+
+        <form action="/" method="GET">
+
+            <button type="submit" class="btn">Log out</button>
         </form>
     </div>
+    </div>
+
 </body>
 
 </html>

@@ -8,13 +8,11 @@ import 'dotenv/config';
 import db from './db/database.js'
 import home_route from './routes/index_routes.js'
 import waiterDatabase from './quiries/databaselogic.js'
-import waiterData from './quiries/databaselogic.js'
 
 const app = express()
-const waiterModule = waiterDatabase(db)
+const waiterData = waiterDatabase(db)
 
-let homeRoute = home_route(waiterData,waiterModule);
-let WaiterData =waiterData(waiterModule)
+let homeRoute = home_route(waiterData);
 
 
 
@@ -44,6 +42,7 @@ app.use(
 // session middleware
 app.use(flash());
 app.get("/",homeRoute.home)
+app.post("/", homeRoute.home)
 app.post("/waiters",homeRoute.enterUsername)
 app.get("/waiters/:username", homeRoute.selectDays)
 app.post("/waiters/:username", homeRoute.getSelectedDays)

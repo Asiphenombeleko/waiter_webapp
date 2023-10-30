@@ -1,14 +1,23 @@
-export default function routes(waiterModule, waiterData) {
+import schedules from "../waiterfactory.js";
+
+const factory = schedules();
+
+export default function routes(waiterData) {
   async function home(req, res) {
     res.render("index", {});
   }
   async function enterUsername(req, res) {
     let username = req.body.username;
-    console.log(username);
-    if (username) {
-      username = await waiterData.insertUsername(username);
+    // if (username) {
+      const existingUser = await waiterData.insertUsername(username);
+    // }
+
+    if (existingUser === null) {
+      req.flash("error", "User does not exists!");
+      res.redirect("/");
+    } else {
+      res.redirect("/waiters/" + username);
     }
-    res.redirect("/waiters/" + username);
   }
 
   async function selectDays(req, res) {
@@ -60,7 +69,7 @@ export default function routes(waiterModule, waiterData) {
       //   charAt(0).toUpperCase() + weekday.slice(1).toLowerCase(); // Capitalize the first letter of the weekday
       if (selectedWeekdays[day]) {
         selectedWeekdays[day].waiters.push(username),
-          (selectedWeekdays[day].colour = addColor(
+          (selectedWeekdays[day].colour = factory.addColor(
             selectedWeekdays[day].waiters.length
           ));
       }
@@ -77,15 +86,7 @@ export default function routes(waiterModule, waiterData) {
 
     return selectedWeekdays;
   }
-  function addColor(daysBooked) {
-    if (daysBooked == 3) {
-      return "success";
-    } else if (daysBooked < 3 && daysBooked > 0) {
-      return "warning";
-    } else if (daysBooked > 3) {
-      return "danger";
-    }
-  }
+
   async function getWaiterName() {
     let getNames = await waiterData.getNames();
     return getNames;
@@ -102,7 +103,6 @@ export default function routes(waiterModule, waiterData) {
     selectDays,
     getSelectedDays,
     getNamesSelectedWeekday,
-    addColor,
     reset,
     getWaiterName,
   };

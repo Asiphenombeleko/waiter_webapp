@@ -1,4 +1,4 @@
-export default function schedules(waiterModule) {
+export default function schedules() {
     let selectedDays = [];
     let username = "";
     let errorMesage;
@@ -7,7 +7,7 @@ export default function schedules(waiterModule) {
     function bookDay(day) {
         if (!selectedDays.includes(day)) {
             selectedDays.push(day);
-            errorMesage = `Booked: ${day}`
+            errorMesage = `Booked ${day}`
         } else {
             errorMesage = `Already booked: ${day}`
             console.log(errorMesage);
@@ -41,26 +41,21 @@ export default function schedules(waiterModule) {
         return username;
     }
 
-  
-    async function bookDayWithWaiterModule(day) {
-        if (!username || username.trim() === "") {
-           errorMesage = "Error: Please set a username before booking a day.";
-        } else {
-            try {
-                // Call waiterModule's bookDay function
-                let result = await waiterModule.bookDay(username, day);
-                errorMesage = result; 
-            } catch (error) {
-                errorMesage = ("Error while booking a day:", error);
-            }
+    function addColor(daysBooked) {
+        if (daysBooked == 3) {
+          return "success";
+        } else if (daysBooked < 3 && daysBooked > 0) {
+          return "warning";
+        } else if (daysBooked > 3) {
+          return "danger";
         }
-    }
+      }
 
     return {
         setUsername,
         getUsername,
         bookDay,
         showSelectedDays,
-        bookDayWithWaiterModule,
+        addColor
     };
 }

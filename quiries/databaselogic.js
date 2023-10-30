@@ -1,40 +1,39 @@
 export default function waiterData(db) {
-  const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]*$/i;
+  // const usernameRegex = /^[a-zA-Z]+$/i;
   async function getNames() {
     let results = await db.any("SELECT DISTINCT username from user_data");
     return results;
   }
   async function insertUsername(username) {
-    try {
-      // Check if the username is empty or undefined
-      if (!username || username.trim() === "") {
-        throw new Error(
-          "Username is empty or undefined. Please provide a valid username."
-        );
-      }
-      // Check if the username matches the regex pattern
-      if (!username.match(usernameRegex)) {
-        throw new Error(
-          "Invalid username format. Please use letters and numbers."
-        );
-      }
+    // try {
+    //   // Check if the username is empty or undefined
+    //   if (!username ) {
+    //     throw new Error(
+    //       "Username is empty or undefined. Please provide a valid username."
+    //     );
+    //   }
+    //   // Check if the username matches the regex pattern
+    //   if (!usernameRegex.test(username)) {
+    //     throw new Error(
+    //       "Invalid username format. Please use letters and numbers."
+    //     );
+    //   }
       // Check if the username already exists in the database
       const waiterExists = await db.oneOrNone(
         "SELECT username FROM user_data WHERE username ilike $1",
         [username]
       );
-
-      console.log(waiterExists);
       if (!waiterExists) {
-        await db.none("INSERT INTO user_data(username)  VALUES ($1)", [
-          username,
-        ]);
+        // await db.none("INSERT INTO user_data(username)  VALUES ($1)", [
+        // username,
+        // ]);
+        return null;
       }
 
-      return waiterExists.username
-    } catch (error) {
-      throw error;
-    }
+      return waiterExists.username;
+    // } catch (error) {
+    //   throw error;
+    // }
   }
 
   async function bookShift(username_id, weekday_ids) {
@@ -84,22 +83,22 @@ export default function waiterData(db) {
     try {
       // const selectedDays = await db.any('SELECT weekday_id FROM user_weekday WHERE username_id = (SELECT id FROM user_data WHERE username = $1)', [username]);
 
-      let x = await db.any(
+      let selectedDays = await db.any(
         `select DISTINCT weekday_id from user_weekday
     join user_data on user_data.id = user_weekday.username_id
     join weekdays on weekdays.id = user_weekday.weekday_id
     where username = $1`,
         [username]
       );
-      console.log(x);
+      // console.log(x);
 
       let week_days = await showDays();
       console.log(week_days);
       for (let i = 0; i < week_days.length; i++) {
         const weekday = week_days[i];
         console.log(weekday.id);
-        for (let j = 0; j < x.length; j++) {
-          const user_days = x[j];
+        for (let j = 0; j < selectedDays.length; j++) {
+          const user_days = selectedDays[j];
           console.log("asi" + user_days.weekday_id);
 
           if (weekday.id === user_days.weekday_id) {
