@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,59 +16,79 @@
             align-items: center;
             height: 100vh;
         }
+
         .container {
             background-color: #fff;
-            padding: 110px; /* Increase padding to make it bigger */
+            padding: 110px;
+            /* Increase padding to make it bigger */
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             text-align: center;
-            max-width: 400px; /* Control the maximum width */
-            width: 100%; /* Adjust width to 100% to make it responsive */
+            max-width: 400px;
+            /* Control the maximum width */
+            width: 100%;
+            /* Adjust width to 100% to make it responsive */
         }
+
         h1 {
             font-family: 'Helvetica', sans-serif;
             color: #333;
         }
+
         .padlock {
-            font-size: 48px; /* Adjust the size of the padlock emoji */
+            font-size: 48px;
+            /* Adjust the size of the padlock emoji */
         }
+
         .form-group {
             margin: 20px 0;
         }
+
         label {
             display: block;
-            font-size: 18px; /* Increase font size */
+            font-size: 18px;
+            /* Increase font size */
             font-weight: 600;
             color: #333;
         }
+
         input[type="text"] {
             width: 100%;
-            padding: 14px; /* Increase padding for input field */
+            padding: 14px;
+            /* Increase padding for input field */
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         .btn {
             background-color: #ff6347;
             color: #fff;
-            padding: 14px 28px; /* Increase padding for button */
+            padding: 14px 28px;
+            /* Increase padding for button */
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 18px; /* Increase font size for button */
+            font-size: 18px;
+            /* Increase font size for button */
         }
+
         .btn:hover {
             background-color: #ff4500;
         }
+
         p {
-            font-size: 16px; /* Adjust font size */
+            font-size: 16px;
+            /* Adjust font size */
             color: #666;
         }
+
         a {
             color: #ff6347;
             text-decoration: none;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <span class="padlock">🔒</span> <!-- Add padlock emoji -->
@@ -77,9 +98,20 @@
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
             </div>
+            <script>
+                // Clear the error message after 3 seconds 
+                setTimeout(function () {
+                    document.querySelector('.error-message').style.display = 'none';
+                },
+                    3000);
+            </script>
+            {{#if error}}
+            <div class="error-message">{{error}}</div>
+            {{/if}}
             <button type="submit" class="btn">Login</button>
         </form>
         {{!-- <p>Don't have an account? <a href="registration">Register</a></p> --}}
     </div>
 </body>
+
 </html>

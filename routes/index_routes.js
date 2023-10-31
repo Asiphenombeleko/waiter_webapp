@@ -4,7 +4,10 @@ const factory = schedules();
 
 export default function routes(waiterData) {
   async function home(req, res) {
-    res.render("index", {});
+    let error = req.flash("error")[0];
+    res.render("index", {
+      error
+    });
   }
   async function enterUsername(req, res) {
     let username = req.body.username;
