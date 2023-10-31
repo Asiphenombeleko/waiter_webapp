@@ -11,9 +11,7 @@ export default function routes(waiterData) {
   }
   async function enterUsername(req, res) {
     let username = req.body.username;
-    // if (username) {
       const existingUser = await waiterData.insertUsername(username);
-    // }
 
     if (existingUser === null) {
       req.flash("error", "User does not exists!");
