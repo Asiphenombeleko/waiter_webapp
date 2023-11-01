@@ -7,7 +7,7 @@ import session from 'express-session'
 import 'dotenv/config';
 import db from './db/database.js'
 import home_route from './routes/index_routes.js'
-import waiterDatabase from './quiries/databaselogic.js'
+import waiterDatabase from './services/databaselogic.js'
 
 const app = express()
 const waiterData = waiterDatabase(db)
@@ -48,6 +48,8 @@ app.get("/waiters/:username", homeRoute.selectDays)
 app.post("/waiters/:username", homeRoute.getSelectedDays)
 app.get("/days",homeRoute.getNamesSelectedWeekday)
 app.post("/reset", homeRoute.reset)
+app.get("/sign-up", homeRoute.register)
+app.post("/sign-up", homeRoute.register)
 // Start the Express server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

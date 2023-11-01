@@ -6,12 +6,12 @@ export default function routes(waiterData) {
   async function home(req, res) {
     let error = req.flash("error")[0];
     res.render("index", {
-      error
+      error,
     });
   }
   async function enterUsername(req, res) {
     let username = req.body.username;
-      const existingUser = await waiterData.insertUsername(username);
+    const existingUser = await waiterData.insertUsername(username);
 
     if (existingUser === null) {
       req.flash("error", "User does not exists!");
@@ -76,15 +76,12 @@ export default function routes(waiterData) {
       }
     });
     let waiterNames = await getWaiterName();
-    console.log(waiterNames);
     let reset = req.flash("reset")[0];
     res.render("admin", {
       selectedWeekdays,
       reset,
       waiterNames,
     });
-    console.log(selectedWeekdays["Monday"].waiters);
-
     return selectedWeekdays;
   }
 
@@ -97,7 +94,14 @@ export default function routes(waiterData) {
     req.flash("reset", "Successfully reset the Roster");
     res.redirect("/days");
   }
-
+  async function register(req, res) {
+    const { username } = req.body;
+    let registerUser = await waiterData.registration(username);
+    res.render("sign-up", {
+      registerUser,
+    });
+    
+  }
   return {
     home,
     enterUsername,
@@ -106,5 +110,6 @@ export default function routes(waiterData) {
     getNamesSelectedWeekday,
     reset,
     getWaiterName,
+    register,
   };
 }

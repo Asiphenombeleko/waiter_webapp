@@ -65,13 +65,10 @@ export default function waiterData(db) {
       );
 
       let week_days = await showDays();
-      console.log(week_days);
       for (let i = 0; i < week_days.length; i++) {
         const weekday = week_days[i];
-        console.log(weekday.id);
         for (let j = 0; j < selectedDays.length; j++) {
           const user_days = selectedDays[j];
-          console.log("asi" + user_days.weekday_id);
 
           if (weekday.id === user_days.weekday_id) {
             weekday.checked = "true";
@@ -110,6 +107,13 @@ export default function waiterData(db) {
   async function reset() {
     await db.none("DELETE FROM user_weekday");
   }
+  async function registration(username) {
+    try {
+      await db.none('INSERT INTO user_data (username) VALUES ($1)', [username]);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   return {
     insertUsername,
@@ -121,5 +125,6 @@ export default function waiterData(db) {
     reset,
     getWaiterSelectedDays,
     getNames,
+    registration
   };
 }

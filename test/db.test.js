@@ -1,6 +1,6 @@
 import assert from "assert";
 import pgPromise from "pg-promise";
-import waiterData from "../quiries/databaselogic.js";
+import waiterData from "../services/databaselogic.js";
 import "dotenv/config";
 import schedules from "../waiterfactory.js";
 
