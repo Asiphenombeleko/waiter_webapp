@@ -4,7 +4,7 @@ CREATE TABLE weekdays (
 );
 CREATE TABLE user_data (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(20) 
+    username VARCHAR(20) UNIQUE
 );
 CREATE TABLE user_weekday (
     id SERIAL PRIMARY KEY,

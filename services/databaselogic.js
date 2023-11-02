@@ -9,7 +9,7 @@ export default function waiterData(db) {
       [username]
     );
     if (!waiterExists) {
-      return null;
+       return null;
     }
 
     return waiterExists.username;

@@ -13,10 +13,17 @@ body {
   border-radius: 8px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); 
   padding: 30px;
+ 
 }
-.waiters-container li {
+
+.waiters-container ul {
   margin-right: 20px;
   font-size: 40px; 
+}
+.waiters-container{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .waiterKey{
   justify-content: center;

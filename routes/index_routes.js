@@ -96,11 +96,24 @@ export default function routes(waiterData) {
   }
   async function register(req, res) {
     const { username } = req.body;
-    let registerUser = await waiterData.registration(username);
+
+    console.log(username);
+    let errorMes = req.flash("errors")[0];
+    let successMes = req.flash("success")[0];
+
+    let waiterUsed = await waiterData.insertUsername(username);
+    console.log(waiterUsed);
+    if (waiterUsed === null) {
+      await waiterData.registration(username);
+      req.flash("success", "New waiter added Successfully");
+    } else {
+      req.flash("errors", "Username already exists.");
+    }
+ 
     res.render("sign-up", {
-      registerUser,
+      successMes,
+      errorMes,
     });
-    
   }
   return {
     home,

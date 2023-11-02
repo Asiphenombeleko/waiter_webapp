@@ -89,23 +89,36 @@
 
 <body>
     <div class="container">
-       
-            <div class="container-register">
-                <h2>Sign Up</h2>
-                <form action="/sign-up" method="post">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                     <div class="button-container">
+
+        <div class="container-register">
+            <h2>Sign Up</h2>
+            <script>
+                // Clear the error message after 3 seconds 
+                setTimeout(function () {
+                    document.querySelector('.error-message').style.display = 'none';
+                },
+                    3000);
+            </script>
+            {{#if successMes}}
+            <div class="success-message">{{successMes}}</div>
+            {{/if}}
+             {{#if errorMes}}
+            <div class="error-message">{{errorMes}}</div>
+            {{/if}}
+            <form action="/sign-up" method="post">
+                <input type="text" name="username" placeholder="Username" required>
+                {{!-- <input type="password" name="password" placeholder="Password" required> --}}
+                <div class="button-container">
                     <button type="submit" class="btn">Sign Up</button>
-                </form>
-                <form action="/" method="GET">
+            </form>
+            <form action="/" method="GET">
 
-                    <button type="submit" class="btn">Back</button>
-                </form>
-            </div>
-
-
+                <button type="submit" class="btn">Back</button>
+            </form>
         </div>
+
+
+    </div>
     </div>
 
 </body>
