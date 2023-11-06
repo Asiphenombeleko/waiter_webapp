@@ -4,15 +4,20 @@ export default function waiterData(db) {
     return results;
   }
   async function insertUsername(username) {
+    const userId = await db.oneOrNone(
+      "INSERT INTO user_data(username) VALUES($1) ON CONFLICT DO NOTHING RETURNING id",
+      [username]
+    );
+
+    return userId;
+  }
+
+  async function checkUsername(username) {
     const waiterExists = await db.oneOrNone(
       "SELECT username FROM user_data WHERE username ilike $1",
       [username]
     );
-    if (!waiterExists) {
-       return null;
-    }
-
-    return waiterExists.username;
+    return waiterExists;
   }
   async function bookShift(username_id, weekday_ids) {
     try {
@@ -109,7 +114,7 @@ export default function waiterData(db) {
   }
   async function registration(username) {
     try {
-      await db.none('INSERT INTO user_data (username) VALUES ($1)', [username]);
+      await db.none("INSERT INTO user_data (username) VALUES ($1)", [username]);
     } catch (error) {
       throw error;
     }
@@ -125,6 +130,7 @@ export default function waiterData(db) {
     reset,
     getWaiterSelectedDays,
     getNames,
-    registration
+    registration,
+    checkUsername,
   };
 }

@@ -10,11 +10,11 @@ export default function routes(waiterData) {
     });
   }
   async function enterUsername(req, res) {
-    let username = req.body.username;
-    const existingUser = await waiterData.insertUsername(username);
+    let { username } = req.body;
+    const existingUser = await waiterData.checkUsername(username);
 
-    if (existingUser === null) {
-      req.flash("error", "User does not exists!");
+    if (!existingUser) {
+      req.flash("error", "User does not exist!");
       res.redirect("/");
     } else {
       res.redirect("/waiters/" + username);
@@ -95,26 +95,28 @@ export default function routes(waiterData) {
     res.redirect("/days");
   }
   async function register(req, res) {
-    const { username } = req.body;
-
-    console.log(username);
     let errorMes = req.flash("errors")[0];
     let successMes = req.flash("success")[0];
 
-    let waiterUsed = await waiterData.insertUsername(username);
-    console.log(waiterUsed);
-    if (waiterUsed === null) {
-      await waiterData.registration(username);
-      req.flash("success", "New waiter added Successfully");
-    } else {
-      req.flash("errors", "Username already exists.");
-    }
- 
     res.render("sign-up", {
       successMes,
       errorMes,
     });
   }
+
+  async function signup(req, res) {
+    const { username } = req.body;
+    let userId = await waiterData.insertUsername(username);
+    console.log(userId);
+
+    if (userId) {
+      req.flash("success", "New waiter added Successfully");
+    } else {
+      req.flash("errors", "Username already exists.");
+    }
+    res.redirect("/sign-up");
+  }
+
   return {
     home,
     enterUsername,
@@ -124,5 +126,6 @@ export default function routes(waiterData) {
     reset,
     getWaiterName,
     register,
+    signup,
   };
 }

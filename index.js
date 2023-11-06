@@ -42,16 +42,16 @@ app.use(
 // session middleware
 app.use(flash());
 app.get("/",homeRoute.home)
-app.post("/", homeRoute.home)
+// app.post("/", homeRoute.home)
 app.post("/waiters",homeRoute.enterUsername)
 app.get("/waiters/:username", homeRoute.selectDays)
 app.post("/waiters/:username", homeRoute.getSelectedDays)
 app.get("/days",homeRoute.getNamesSelectedWeekday)
 app.post("/reset", homeRoute.reset)
 app.get("/sign-up", homeRoute.register)
-app.post("/sign-up", homeRoute.register)
+app.post("/sign-up", homeRoute.signup)
 // Start the Express server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log("listen at localhost:", PORT);
 })
